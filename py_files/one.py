@@ -1,11 +1,11 @@
 import requests
+from bs4 import BeautifulSoup
 
-url = "https://www.mongard.ir/"
+url = "https://en.wikipedia.org/wiki/Shadmehr_Aghili"
 
 response = requests.get(url)
 
-print(dir(response.request))
-print(response.request.headers)
+content = BeautifulSoup(response.text, "html.parser")
+result = content.select('h1 > span[class=mw-page-title-main]')
 
-with open('test.html', 'w') as text:
-    text.write(response.text)
+print(result)
