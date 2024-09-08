@@ -1,6 +1,8 @@
 import requests
+from bs4 import BeautifulSoup
 
-url = 'https://www.wikipedia.org'
+url = 'https://en.wikipedia.org/wiki/Mao_Zedong'
 
 response = requests.get(url)
-print(response.text)
+content = BeautifulSoup(response.text, features='html.parser')
+print(content.select('li > a[title="Benjamin Tucker"]'))
